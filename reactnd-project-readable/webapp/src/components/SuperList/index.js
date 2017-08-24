@@ -1,9 +1,18 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 const SuperList = ({elements, title}) => {
   const POST = 'post'
   const CATEGORY = 'category'
+
+  const postEntry = (element) => (
+    <Link to={`/post/${element.id}`}>{element.title}</Link>
+  )
+
+  const categoryEntry = (element) => (
+    <Link to={`/category/${element.path}`}>{element.name}</Link>
+  )
 
   if (elements.length === 0) 
     return (
@@ -19,7 +28,7 @@ const SuperList = ({elements, title}) => {
           elements.map(function(element, index) {
             return (
               <li key={index}>
-                {(type === POST) ? element.title : element.name }
+                {(type === POST) ? postEntry(element) : categoryEntry(element) }
               </li>
             )
           })

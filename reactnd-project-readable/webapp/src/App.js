@@ -5,6 +5,7 @@ import { Route } from 'react-router-dom'
 
 import Header from './components/Header'
 import Main from './pages/Main';
+import Post from './pages/Post';
 
 class App extends Component {
   render() {
@@ -13,8 +14,8 @@ class App extends Component {
       <Header />
  
       <Route exact path='/' component={Main} /> 
-      {/* <Route path='/deals' component={} /> */}
-      {/* <Route path='/deal' component={} /> */}
+      <Route path='/category/:path' component={Main} />
+      <Route path='/post/:id' component={Post} />
 
     </div>
     );

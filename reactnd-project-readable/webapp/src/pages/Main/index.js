@@ -1,20 +1,30 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import MainView from './mainView'
+
 import {recieveAllCategories, recieveAllPosts} from './action'
 import {list as listCategories} from '../../services/categoriesAPI'
-import {list as listPosts} from '../../services/postsAPI'
+import {list as listPosts, getAllFromCategory as listPostsInCategory} from '../../services/postsAPI'
 
 class Main extends Component {
+  
   componentDidMount = () => {
-    this.props.fetchPosts();
-    this.props.fetchCategories();
+    this.props.fetchCategories()
     
-  }
+    if (this.props.match.params.path) {
+      this.props.fetchPostsInCategory(this.props.match.params.path)
+    } else {
+      this.props.fetchPosts()
+    }
+     
+  } //end componentDidMount
 
-  render = () => {
-    return <MainView categories={this.props.categories} posts={this.props.posts} />
-  }
+  componentWillReceiveProps = (nextProps) => {
+    if (nextProps.match.params.path !== this.props.match.params.path) 
+      nextProps.fetchPostsInCategory(nextProps.match.params.path)
+  } //end componentWillReceiveProps
+
+  render = () => <MainView />
 }
 
 const mapStateToProps = (state, props) => {
@@ -28,8 +38,9 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchCategories: () => listCategories().then(categories => dispatch( recieveAllCategories(categories) )),
-    fetchPosts: () => listPosts().then(posts => dispatch( recieveAllPosts(posts) ))
+    fetchCategories: () => listCategories().then( categories => dispatch( recieveAllCategories(categories)) ),
+    fetchPosts: () => listPosts().then( posts => dispatch(recieveAllPosts(posts)) ),
+    fetchPostsInCategory: (categoryPath) => listPostsInCategory(categoryPath).then( posts => dispatch(recieveAllPosts(posts)) )
   }
 }
 

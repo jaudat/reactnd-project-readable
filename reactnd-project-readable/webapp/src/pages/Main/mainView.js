@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import {connect} from 'react-redux'
 import SuperList from '../../components/SuperList/'
 import './style.css'
 
@@ -18,4 +19,13 @@ MainView.propTypes = {
   categories: PropTypes.array.isRequired
 }
 
-export default MainView
+const mapStateToProps = (state, props) => {
+  
+    return {
+      categories: state.categories,
+      posts: state.posts
+    }
+  
+}
+
+export default connect(mapStateToProps)(MainView)
