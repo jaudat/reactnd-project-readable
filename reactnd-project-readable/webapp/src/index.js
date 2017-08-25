@@ -9,12 +9,13 @@ import thunk from 'redux-thunk'
 import {Provider} from 'react-redux'
 import {BrowserRouter} from 'react-router-dom'
 import {categoriesReducer, postsReducer} from './pages/Main/reducer'
-import {selectedPostReducer} from './pages/Post/reducer'
+import {selectedPostReducer, allCommentsOnSelectedPostReducer} from './pages/Post/reducer'
 
 const rootReducer = combineReducers({
   categories: categoriesReducer,
   posts: postsReducer,
-  selectedPost: selectedPostReducer
+  selectedPost: selectedPostReducer,
+  allCommentsOnSelectedPost: allCommentsOnSelectedPostReducer
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION__ || compose

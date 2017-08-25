@@ -1,0 +1,31 @@
+.post-header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.post-vote {
+  text-align: center;
+  padding: 15px;
+  border: thin dotted red;
+  margin: 0px 10px 0px 10px;
+}
+
+.about-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.post-timestamp {
+  width: 50%;
+  margin: 0px;
+  text-align: right;
+}
+
+.post-author {
+  width: 50%;
+  margin: 0px;
+  text-align: left;
+}

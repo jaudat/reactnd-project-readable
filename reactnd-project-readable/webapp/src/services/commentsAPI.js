@@ -15,12 +15,12 @@ const headers = {
     USAGE:
       Get all the comments for a single post
 */
-export const list = (id) =>{
+export const list = (id) => (
 
     fetch(`${api}/posts/${id}/comments`, { headers })
       .then(res => res.json())
 
-}
+)
 
 /**
   POST /comments
