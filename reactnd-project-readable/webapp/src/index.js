@@ -10,12 +10,16 @@ import {Provider} from 'react-redux'
 import {BrowserRouter} from 'react-router-dom'
 import {categoriesReducer, postsReducer} from './pages/Main/reducer'
 import {selectedPostReducer, allCommentsOnSelectedPostReducer} from './pages/Post/reducer'
+import {sortPostsReducer} from './components/Post/List/reducer'
+import {sortCommentsReducer} from './components/Comment/List/reducer'
 
 const rootReducer = combineReducers({
   categories: categoriesReducer,
   posts: postsReducer,
   selectedPost: selectedPostReducer,
-  allCommentsOnSelectedPost: allCommentsOnSelectedPostReducer
+  allCommentsOnSelectedPost: allCommentsOnSelectedPostReducer,
+  sortPostsBy: sortPostsReducer,
+  sortCommentsBy: sortCommentsReducer
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION__ || compose

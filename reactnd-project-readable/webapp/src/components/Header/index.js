@@ -4,7 +4,7 @@ import './style.css'
 
 const Header = (props) => (
   <header className='header'>
-    <Link id='brand-name' to='/'>Reddit Clone</Link>
+    <Link id='brand-name' to='/'>Readable</Link>
   </header>
 )
 

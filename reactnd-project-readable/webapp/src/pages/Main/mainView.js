@@ -1,31 +1,15 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
-import SuperList from '../../components/SuperList/'
+import CategoryList from '../../components/Category/List'
+import PostList from '../../components/Post/List'
 import './style.css'
 
 
-const MainView = ({posts, categories}) => {
+const MainView = () => {
   return (
     <div className='grid'>
-      <SuperList elements={categories} title="Categories"/>
-      <SuperList elements={posts} title="Posts"/>
+      <CategoryList />
+      <PostList/>
     </div>
   )
 }
-
-MainView.propTypes = {
-  posts: PropTypes.array.isRequired,
-  categories: PropTypes.array.isRequired
-}
-
-const mapStateToProps = (state, props) => {
-  
-    return {
-      categories: state.categories,
-      posts: state.posts
-    }
-  
-}
-
-export default connect(mapStateToProps)(MainView)
+export default MainView
