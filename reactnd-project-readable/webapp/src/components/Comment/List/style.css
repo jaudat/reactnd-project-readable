@@ -24,3 +24,17 @@ td, th {
 tr:nth-child(even) {
   background-color: #dddddd;
 }
+
+.comment-vote-widget {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.decrement-votes {
+  margin: 0px 0px 0px 10px;
+}
+
+.score-votes {
+  margin: 0px 4px 0px 4px;
+}

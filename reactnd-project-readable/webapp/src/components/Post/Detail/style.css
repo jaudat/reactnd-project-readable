@@ -5,11 +5,18 @@
   align-items: center;
 }
 
+.post-vote-widget {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0px 15px 0px 5px;
+}
+
 .post-vote {
   text-align: center;
   padding: 15px;
   border: thin dotted red;
-  margin: 0px 10px 0px 10px;
+  margin: 0px 3px 0px 3px;
 }
 
 .about-row {

@@ -1,14 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import {incrementVote, decrementVote, UPVOTE, DOWNVOTE} from '../List/action'
+import {vote} from '../../../services/postsAPI'
 import './style.css'
 
-const Detail = ({selectedPost}) => {
-  var date = new Date(selectedPost.timestamp)
+const Detail = ({selectedPost, decrement, increment}) => {
+  const date = new Date(selectedPost.timestamp)
+
   return (
     <div className='post-details'> 
       <span className='post-header'>
-        <p className='post-vote'>{selectedPost.voteScore}</p>
+        <span className='post-vote-widget'>
+          <button className='decrement-votes' onClick={() => decrement(selectedPost.id)}>-</button> 
+          <p className='post-vote'>{selectedPost.voteScore}</p>
+          <button className='increment-votes' onClick={() => increment(selectedPost.id)}>+</button>
+        </span>
         <h1 className='post-title'>{selectedPost.title}</h1>
       </span>
       <span className='about-row'> 
@@ -28,4 +35,9 @@ const mapStateToProps = (state, props) => ({
   selectedPost: state.selectedPost
 })
 
-export default connect(mapStateToProps)(Detail)
+const mapDispatchToProps = (dispatch) => ({
+  increment: (postId) => vote(postId, UPVOTE).then( data => dispatch(incrementVote(data)) ),
+  decrement: (postId) => vote(postId, DOWNVOTE).then( data => dispatch(decrementVote(data)) )
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Detail)

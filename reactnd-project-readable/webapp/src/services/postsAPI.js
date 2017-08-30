@@ -74,7 +74,7 @@ export const vote = (id, option) =>
       ...headers,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(option)
+    body: JSON.stringify({option})
   }).then(res => res.json())
 
 /**

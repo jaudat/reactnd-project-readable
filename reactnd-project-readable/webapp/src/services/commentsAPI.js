@@ -66,20 +66,17 @@ export const show = (id) => {
     USAGE:
       Used for voting on a comment.
 */
-export const vote = (id, option) => {
-
+export const vote = (id, option) => (
     fetch(`${api}/comments/${id}`, {
       method: 'POST',
       headers: {
         ...headers,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(option)
+      body: JSON.stringify({option})
     }).then(res => res.json())
-
-
-}
-
+  )
+  
 
 /**
   PUT /comments/:id

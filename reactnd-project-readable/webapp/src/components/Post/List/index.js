@@ -2,7 +2,8 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {sortPostsBy, TIMESTAMP, VOTES} from './action'
+import {sortPostsBy, TIMESTAMP, VOTES, incrementVote, decrementVote, UPVOTE, DOWNVOTE} from './action'
+import {vote} from '../../../services/postsAPI'
 import './style.css'
 
 class PostList extends Component {
@@ -23,6 +24,7 @@ class PostList extends Component {
   }
 
   render = () => {
+    const me = this
     return (
       <div className='postlist-wrapper'>
         <span className='postlist-header'>
@@ -50,7 +52,11 @@ class PostList extends Component {
                     <Link to={`/post/${post.id}`}>{post.title}</Link>
                   </td>
                   <td>{ (new Date(post.timestamp)).toUTCString() }</td>
-                  <td>{post.voteScore}</td>
+                  <td>
+                    <button className='decrement-votes' onClick={() => me.props.decrement(post.id)}>-</button> 
+                    {' ' + post.voteScore + ' '}
+                    <button className='increment-votes' onClick={() => me.props.increment(post.id)}>+</button>
+                  </td>
                 </tr>
               )
             })
@@ -75,7 +81,9 @@ const mapStateToProps = (state, props) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  orderBy: (value) => dispatch(sortPostsBy(value))
+  orderBy: (value) => dispatch(sortPostsBy(value)),
+  increment: (postId) => vote(postId, UPVOTE).then( data => dispatch(incrementVote(data)) ),
+  decrement: (postId) => vote(postId, DOWNVOTE).then( data => dispatch(decrementVote(data)) )
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostList)

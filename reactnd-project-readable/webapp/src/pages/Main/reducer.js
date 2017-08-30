@@ -1,4 +1,5 @@
 import {RECIEVE_ALL_CATEGORIES, RECIEVE_ALL_POSTS} from './action'
+import {INCREMENT_VOTE_IN_POST, DECREMENT_VOTE_IN_POST} from '../../components/Post/List/action'
 
 export function categoriesReducer(state = [], action) {
   switch (action.type) {
@@ -13,6 +14,24 @@ export function postsReducer(state = [], action) {
   switch (action.type) {
     case RECIEVE_ALL_POSTS:
       return action.posts
+    case INCREMENT_VOTE_IN_POST:
+      return (
+        state.map( (post) => {
+          if (post.id === action.post.id) {
+              return action.post
+          }
+          return post
+        })
+      )
+    case DECREMENT_VOTE_IN_POST:
+      return (
+        state.map( (post) => {
+          if (post.id === action.post.id) {
+              return action.post
+          }
+          return post
+        })
+      )
     default: 
       return state
   }
