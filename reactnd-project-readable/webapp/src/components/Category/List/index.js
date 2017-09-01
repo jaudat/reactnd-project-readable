@@ -12,7 +12,7 @@ const CategoryList = ({categories}) => (
           categories.map(function(category, index) {
             return (
               <li key={index}>
-                <Link to={`/category/${category.path}`}>{category.name}</Link>
+                <Link to={`/${category.path}`}>{category.name}</Link>
               </li>
             )
           })

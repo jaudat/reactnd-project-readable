@@ -37,30 +37,35 @@ class PostList extends Component {
         </span>
         <table className='postlist-table'>
           <thead>
-          <tr>
-            <th>Title</th>
-            <th>Timestamp</th>
-            <th>Votes</th>
-          </tr>
+            <tr>
+              <th>Title</th>
+              <th>Timestamp</th>
+              <th>Votes</th>
+            </tr>
           </thead>
           <tbody>
-          {
-            this.props.posts.map(function(post, index) {
-              return (
-                <tr key={index}>
-                  <td>
-                    <Link to={`/post/${post.id}`}>{post.title}</Link>
-                  </td>
-                  <td>{ (new Date(post.timestamp)).toUTCString() }</td>
-                  <td>
-                    <button className='decrement-votes' onClick={() => me.props.decrement(post.id)}>-</button> 
-                    {' ' + post.voteScore + ' '}
-                    <button className='increment-votes' onClick={() => me.props.increment(post.id)}>+</button>
-                  </td>
-                </tr>
-              )
-            })
-          }
+            {
+              this.props.posts.map(function(post, index) {
+                return (
+                  <tr key={index}>
+                    <td>
+                      <Link to={`/${post.category}/${post.id}`}>{post.title}</Link>
+                    </td>
+                    <td>{ (new Date(post.timestamp)).toUTCString() }</td>
+                    <td>
+                      <button className='decrement-votes' onClick={() => me.props.decrement(post.id)}>-</button> 
+                      {' ' + post.voteScore + ' '}
+                      <button className='increment-votes' onClick={() => me.props.increment(post.id)}>+</button>
+                    </td>
+                  </tr>
+                )
+              })
+            }
+            <tr>
+              <td></td>
+              <td className='post-new'><Link to='/post/new'>Create New Post</Link></td>
+              <td></td>
+            </tr>
           </tbody>
         </table>
       </div>

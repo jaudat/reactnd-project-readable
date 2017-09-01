@@ -11,8 +11,8 @@ class Main extends Component {
   componentDidMount = () => {
     this.props.fetchCategories()
     
-    if (this.props.match.params.path) {
-      this.props.fetchPostsInCategory(this.props.match.params.path)
+    if (this.props.match.params.category) {
+      this.props.fetchPostsInCategory(this.props.match.params.category)
     } else {
       this.props.fetchPosts()
     }
@@ -20,8 +20,8 @@ class Main extends Component {
   } //end componentDidMount
 
   componentWillReceiveProps = (nextProps) => {
-    if (nextProps.match.params.path !== this.props.match.params.path) 
-      nextProps.fetchPostsInCategory(nextProps.match.params.path)
+    if (nextProps.match.params.category !== this.props.match.params.category) 
+      nextProps.fetchPostsInCategory(nextProps.match.params.category)
   } //end componentWillReceiveProps
 
   render = () => <MainView />

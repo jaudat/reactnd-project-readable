@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import { Route } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 
 import Header from './components/Header'
 import Main from './pages/Main';
@@ -14,9 +14,12 @@ class App extends Component {
       <Header />
  
       <Route exact path='/' component={Main} /> 
-      <Route path='/category/:path' component={Main} />
-      <Route path='/post/:id' component={Post} />
-
+      <Switch>
+        {/* <Route path='/:category/new' component={PostForm}/> */}
+        {/* <Route path='/:category/:post_id/edit' component={PostForm}/> */}
+        <Route path='/:category/:post_id' component={Post} />
+        <Route path='/:category' component={Main} />
+      </Switch>
     </div>
     );
   }

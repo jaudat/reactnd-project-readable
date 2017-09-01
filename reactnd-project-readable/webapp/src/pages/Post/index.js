@@ -9,8 +9,8 @@ import {list as getAllComments} from '../../services/commentsAPI'
 class Post extends Component {
 
   componentDidMount = () => {
-    this.props.fetchPost( this.props.match.params.id )
-    this.props.fetchAllCommentsOnPost( this.props.match.params.id )
+    this.props.fetchPost( this.props.match.params.post_id )
+    this.props.fetchAllCommentsOnPost( this.props.match.params.post_id )
   }
 
   render = () => <PostView />
