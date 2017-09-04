@@ -45,7 +45,7 @@ class PostList extends Component {
           </thead>
           <tbody>
             {
-              this.props.posts.map(function(post, index) {
+              this.props.posts.filter( (post, index) => (!post.deleted) ).map(function(post, index) {
                 return (
                   <tr key={index}>
                     <td>

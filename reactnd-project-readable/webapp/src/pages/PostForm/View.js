@@ -13,7 +13,7 @@ class View extends Component {
   }
 
   handleSubmit = (event) => {
-    (this.props.formPost.isNew) ? this.props.editPost(this.props.formPost) : this.props.newPost(this.props.formPost)
+    (this.props.formPost.isNew) ? this.props.newPost(this.props.formPost) : this.props.editPost(this.props.formPost)
     event.preventDefault()
     this.setState({redirect: true})
   } 

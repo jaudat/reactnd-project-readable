@@ -102,5 +102,4 @@ export const update = (id, title, body) =>
       Sets the parentDeleted flag for all child comments to 'true'.
 */
 export const remove = (id) =>
-  fetch(`${api}/posts/${id}}`, { method: 'DELETE', headers })
-    .then(res => res.json())
+  fetch(`${api}/posts/${id}`, { method: 'DELETE', headers })
