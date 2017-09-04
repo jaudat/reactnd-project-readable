@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {incrementVote, decrementVote, UPVOTE, DOWNVOTE} from '../List/action'
 import {vote} from '../../../services/postsAPI'
 import './style.css'
@@ -10,6 +11,11 @@ const Detail = ({selectedPost, decrement, increment}) => {
 
   return (
     <div className='post-details'> 
+      <div className='post-buttons'>
+        <span className='filler'></span>
+        <Link className='edit-post' to={`/${selectedPost.category}/${selectedPost.id}/edit`}>Edit Post</Link>
+        <button className='delete-post'>Delete Post</button>
+      </div>
       <span className='post-header'>
         <span className='post-vote-widget'>
           <button className='decrement-votes' onClick={() => decrement(selectedPost.id)}>-</button> 

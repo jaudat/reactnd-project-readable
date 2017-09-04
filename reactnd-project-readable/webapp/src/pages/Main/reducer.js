@@ -1,5 +1,6 @@
 import {RECIEVE_ALL_CATEGORIES, RECIEVE_ALL_POSTS} from './action'
 import {INCREMENT_VOTE_IN_POST, DECREMENT_VOTE_IN_POST} from '../../components/Post/List/action'
+import {RECIEVE_CREATED_POST, RECIEVE_UPDATED_POST} from '../PostForm/action'
 
 export function categoriesReducer(state = [], action) {
   switch (action.type) {
@@ -32,6 +33,10 @@ export function postsReducer(state = [], action) {
           return post
         })
       )
+    case RECIEVE_CREATED_POST:
+      return state.splice(state.length, 0, action.post)
+    case RECIEVE_UPDATED_POST:
+      return state
     default: 
       return state
   }
