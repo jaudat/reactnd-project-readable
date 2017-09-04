@@ -36,7 +36,12 @@ export function postsReducer(state = [], action) {
     case RECIEVE_CREATED_POST:
       return state.splice(state.length, 0, action.post)
     case RECIEVE_UPDATED_POST:
-      return state
+      return (
+        state.map( (post) => {
+          if (post.id === action.post.id) return action.post
+          return post
+        })
+      )
     default: 
       return state
   }
