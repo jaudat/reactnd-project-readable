@@ -20,3 +20,8 @@ td, th {
 tr:nth-child(even) {
   background-color: #dddddd;
 }
+
+.post-new {
+  width: 100%;
+  text-align: center;
+}

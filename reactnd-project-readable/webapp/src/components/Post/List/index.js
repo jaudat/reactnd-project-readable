@@ -39,6 +39,7 @@ class PostList extends Component {
           <thead>
             <tr>
               <th>Title</th>
+              <th># of Comments</th>
               <th>Timestamp</th>
               <th>Votes</th>
             </tr>
@@ -51,23 +52,24 @@ class PostList extends Component {
                     <td>
                       <Link to={`/${post.category}/${post.id}`}>{post.title}</Link>
                     </td>
+                    <td>
+                      <p>{post.numberOfComments}</p>
+                    </td>
                     <td>{ (new Date(post.timestamp)).toUTCString() }</td>
                     <td>
-                      <button className='decrement-votes' onClick={() => me.props.decrement(post.id)}>-</button> 
+                      <button className='decrement-votes' onClick={() => me.props.decrement(post)}>-</button> 
                       {' ' + post.voteScore + ' '}
-                      <button className='increment-votes' onClick={() => me.props.increment(post.id)}>+</button>
+                      <button className='increment-votes' onClick={() => me.props.increment(post)}>+</button>
                     </td>
                   </tr>
                 )
               })
             }
-            <tr>
-              <td></td>
-              <td className='post-new'><Link to='/post/new'>Create New Post</Link></td>
-              <td></td>
-            </tr>
           </tbody>
         </table>
+        <div className='post-new'>
+          <Link to='/post/new'>Create New Post</Link>
+        </div>
       </div>
     )
   }
@@ -87,8 +89,8 @@ const mapStateToProps = (state, props) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   orderBy: (value) => dispatch(sortPostsBy(value)),
-  increment: (postId) => vote(postId, UPVOTE).then( data => dispatch(incrementVote(data)) ),
-  decrement: (postId) => vote(postId, DOWNVOTE).then( data => dispatch(decrementVote(data)) )
+  increment: (post) => vote(post.id, UPVOTE).then( data => dispatch(incrementVote({...data, numberOfComments: post.numberOfComments})) ),
+  decrement: (post) => vote(post.id, DOWNVOTE).then( data => dispatch(decrementVote({...data, numberOfComments: post.numberOfComments})) )
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostList)
