@@ -12,8 +12,9 @@ import {BrowserRouter} from 'react-router-dom'
 import {categoriesReducer, postsReducer} from './pages/Main/reducer'
 import {selectedPostReducer, allCommentsOnSelectedPostReducer} from './pages/Post/reducer'
 import {sortPostsReducer} from './components/Post/List/reducer'
+import {postDetailRedirectReducer} from './components/Post/Detail/reducer'
 import {sortCommentsReducer, formCommentReducer, editingCommentReducer} from './components/Comment/List/reducer'
-import {formPostReducer} from './pages/PostForm/reducer'
+import {formPostReducer, postFormRedirectReducer} from './pages/PostForm/reducer'
 
 const rootReducer = combineReducers({
   categories: categoriesReducer,
@@ -24,7 +25,9 @@ const rootReducer = combineReducers({
   sortCommentsBy: sortCommentsReducer,
   formPost: formPostReducer,
   formComment: formCommentReducer,
-  editingComment: editingCommentReducer
+  editingComment: editingCommentReducer,
+  postDetailRedirect: postDetailRedirectReducer,
+  postFormRedirect: postFormRedirectReducer
 })
 
 // const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION__ || compose

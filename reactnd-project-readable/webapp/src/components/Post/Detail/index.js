@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link, Redirect} from 'react-router-dom'
 import {incrementVote, decrementVote, UPVOTE, DOWNVOTE} from '../List/action'
+import {recievePostDetailRedirect} from './action'
 // import {deletePost} from './action'
 import {vote, remove} from '../../../services/postsAPI'
 import './style.css'
@@ -11,11 +12,11 @@ class Detail extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {redirect: false}
+    this.props.redirect(false)
   }
   render = () => {
 
-    if (this.state.redirect) return <Redirect to='/' />
+    if (this.props.postDetailRedirect) return <Redirect to='/' />
 
     const selectedPost = this.props.selectedPost
     const date = new Date(selectedPost.timestamp)
@@ -27,7 +28,7 @@ class Detail extends Component {
           <button className='delete-post' onClick={(event) => {
             const me = this
             remove(selectedPost.id)
-            me.setState({redirect: true})
+            me.props.redirect(true)
             }}>Delete Post</button>
         </div>
         <span className='post-header'>
@@ -49,16 +50,19 @@ class Detail extends Component {
 }
 
 Detail.propTypes = {
-  selectedPost: PropTypes.object.isRequired
+  selectedPost: PropTypes.object.isRequired,
+  postDetailRedirect: PropTypes.bool.isRequired
 }
 
 const mapStateToProps = (state, props) => ({
-  selectedPost: state.selectedPost
+  selectedPost: state.selectedPost,
+  postDetailRedirect: state.postDetailRedirect
 })
 
 const mapDispatchToProps = (dispatch) => ({
   increment: (postId) => vote(postId, UPVOTE).then( data => dispatch(incrementVote(data)) ),
   decrement: (postId) => vote(postId, DOWNVOTE).then( data => dispatch(decrementVote(data)) ),
+  redirect: (value) => dispatch(recievePostDetailRedirect(value)),
   // delete: (postId) => remove(postId).then( data => dispatch(deletePost(postId)) )
 })
 

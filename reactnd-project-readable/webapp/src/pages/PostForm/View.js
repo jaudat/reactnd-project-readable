@@ -2,20 +2,20 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 
-import {recieveCreatedPost, recieveUpdatedPost, recieveFormPost} from './action'
+import {recieveCreatedPost, recieveUpdatedPost, recieveFormPost, recievePostFormRedirect} from './action'
 import {create, update} from '../../services/postsAPI'
 
 class View extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {redirect: false}
+    this.props.redirect(false)
   }
 
   handleSubmit = (event) => {
     (this.props.formPost.isNew) ? this.props.newPost(this.props.formPost) : this.props.editPost(this.props.formPost)
     event.preventDefault()
-    this.setState({redirect: true})
+    this.props.redirect(true)
   } 
 
   handleTitle = (event) => {
@@ -35,7 +35,7 @@ class View extends Component {
   }
 
   render = () => {
-    if (this.state.redirect) return <Redirect to='/' />
+    if (this.props.postFormRedirect) return <Redirect to='/' />
 
     const post = this.props.formPost
     return (
@@ -73,7 +73,8 @@ class View extends Component {
 
 const mapStateToProps = (state, props) => {
   return {
-    formPost: state.formPost
+    formPost: state.formPost,
+    postFormRedirect: state.postFormRedirect
   }
 }
   
@@ -82,7 +83,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     newPost: (post) => create(post.id, post.timestamp, post.title, post.body, 'jaudat', post.category).then( newPost => dispatch(recieveCreatedPost(newPost)) ),
     editPost: (post) => update(post.id, post.title, post.body).then( editedPost => dispatch(recieveUpdatedPost(editedPost)) ),
-    saveFormPost: (post) => dispatch(recieveFormPost(post))
+    saveFormPost: (post) => dispatch(recieveFormPost(post)),
+    redirect: (value) => dispatch(recievePostFormRedirect(value))
   }
 }
 
