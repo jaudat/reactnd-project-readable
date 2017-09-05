@@ -105,10 +105,7 @@ export const update = (id, timestamp, body) => {
     USAGE:
       Sets a comment's deleted flag to 'true'
 */
-export const remove = (id) => {
-
-    fetch(`${api}/comments/${id}}`, { method: 'DELETE', headers })
-      .then(res => res.json())
-
-  
-}
+export const remove = (id) => (
+  fetch(`${api}/comments/${id}`, { method: 'DELETE', headers })
+    .then(res => res.json())
+)
