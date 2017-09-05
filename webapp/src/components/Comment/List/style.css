@@ -1,0 +1,40 @@
+.commentslist-wrapper {
+  border: thin solid black
+}
+
+.commentslist-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: none;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.comment-vote-widget {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.decrement-votes {
+  margin: 0px 0px 0px 10px;
+}
+
+.score-votes {
+  margin: 0px 4px 0px 4px;
+}
