@@ -86,8 +86,7 @@ export const vote = (id, option) => (
       timestamp: timestamp. Get this however you want.
       body: String
 */
-export const update = (id, timestamp, body) => {
-
+export const update = (id, timestamp, body) => (
     fetch(`${api}/comments/${id}`, {
       method: 'PUT',
       headers: {
@@ -96,9 +95,7 @@ export const update = (id, timestamp, body) => {
       },
       body: JSON.stringify({timestamp, body})
     }).then(res => res.json())
-
-
-}
+  )
 
 /**
   DELETE /comments/:id

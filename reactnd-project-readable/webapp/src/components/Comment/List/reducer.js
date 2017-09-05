@@ -1,4 +1,4 @@
-import {SORT_COMMENTS_BY, VOTES, RECIEVE_FORM_COMMENT} from './action'
+import {SORT_COMMENTS_BY, VOTES, RECIEVE_FORM_COMMENT, RECIEVE_EDITING_COMMENT_ID} from './action'
 
 export function sortCommentsReducer(state = VOTES, action) {
   switch (action.type) {
@@ -13,6 +13,15 @@ export function formCommentReducer(state={author:'', body:''}, action) {
   switch (action.type) {
     case RECIEVE_FORM_COMMENT:
       return action.formComment
+    default:
+      return state
+  }
+}
+
+export function editingCommentReducer(state='', action) {
+  switch (action.type) {
+    case RECIEVE_EDITING_COMMENT_ID:
+      return action.commentId
     default:
       return state
   }

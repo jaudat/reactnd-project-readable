@@ -10,6 +10,7 @@ export const RECIEVE_CREATED_COMMENT = 'RECIEVE_CREATED_COMMENT'
 export const RECIEVE_UPDATED_COMMENT = 'RECIEVE_UPDATED_COMMENT'
 export const RECIEVE_DELETED_COMMENT = 'RECIEVE_DELETED_COMMENT'
 export const RECIEVE_FORM_COMMENT = 'RECIEVE_FORM_COMMENT'
+export const RECIEVE_EDITING_COMMENT_ID = 'RECIEVE_EDITING_COMMENT_ID'
 
 export const sortCommentsBy = (order) => ({
   type: SORT_COMMENTS_BY,
@@ -46,3 +47,8 @@ export const recieveDeletedComment = commentId => ({
   commentId
 })
 
+
+export const recieveEditingCommentId = commentId => ({
+  type: RECIEVE_EDITING_COMMENT_ID,
+  commentId
+})
