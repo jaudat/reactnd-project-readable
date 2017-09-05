@@ -8,47 +8,45 @@ import {list as listPosts, getAllFromCategory as listPostsInCategory} from '../.
 import {list as listComments} from '../../services/commentsAPI'
 
 class Main extends Component {
+
+  getCommentsLengthForPosts = posts => {
+    const postsWithCommentLength = []
+    posts.filter(function(post, index) {
+      return (!post.deleted)
+    }).forEach(function(post, index) {
+
+      postsWithCommentLength.push(
+        listComments(post.id).then(comments => {
+          const commLength = 
+            comments.filter(function(comment, index) {
+              return (!comment.deleted)
+            }).length
+            
+          return {...post, numberOfComments: commLength}
+        })
+      )
+
+    })
+
+    Promise.all(postsWithCommentLength).then(posts => this.props.setPosts(posts) )
+  }
   
   componentDidMount = () => {
-    const me = this
-    const getCommentsLengthForPosts = posts => {
-      const postsWithCommentLength = []
-      posts.filter(function(post, index) {
-        return (!post.deleted)
-      }).forEach(function(post, index) {
-
-        postsWithCommentLength.push(
-          listComments(post.id).then(comments => {
-            const commLength = 
-              comments.filter(function(comment, index) {
-                return (!comment.deleted)
-              }).length
-              
-            return {...post, numberOfComments: commLength}
-          })
-        )
-
-      })
-
-      Promise.all(postsWithCommentLength).then(posts => me.props.setPosts(posts) )
-      
-
-    }
-
-
     this.props.fetchCategories()
     
     if (this.props.match.params.category) {
-      listPostsInCategory(this.props.match.params.category).then(posts => getCommentsLengthForPosts(posts))
+      listPostsInCategory(this.props.match.params.category).then(posts => this.getCommentsLengthForPosts(posts))
     } else {
-      listPosts().then(posts => getCommentsLengthForPosts(posts))
+      listPosts().then(posts => this.getCommentsLengthForPosts(posts))
     }
      
   } //end componentDidMount
 
   componentWillReceiveProps = (nextProps) => {
-    if (nextProps.match.params.category !== this.props.match.params.category) 
-      nextProps.fetchPostsInCategory(nextProps.match.params.category)
+    if (nextProps.match.params.category !== this.props.match.params.category) {
+      listPostsInCategory(nextProps.match.params.category).then(posts => this.getCommentsLengthForPosts(posts))
+    }
+
   } //end componentWillReceiveProps
 
   render = () => <MainView />
