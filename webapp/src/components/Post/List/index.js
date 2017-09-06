@@ -31,8 +31,8 @@ class PostList extends Component {
           <h3>Posts</h3>
           <span className='reOrder-button'>
             <label>Sort By: </label>
-            <button className='button order-by-timestamp' onClick={() => this.props.orderBy(TIMESTAMP)}>Timestamp</button>
-            <button className='button order-by-votes' onClick={() => this.props.orderBy(VOTES)}>Votes</button>
+            <button className='button order-by-timestamp' disabled={(this.props.sortPostsBy===TIMESTAMP) ? true : false} onClick={() => this.props.orderBy(TIMESTAMP)}>Timestamp</button>
+            <button className='button order-by-votes' disabled={(this.props.sortPostsBy===VOTES) ? true : false} onClick={() => this.props.orderBy(VOTES)}>Votes</button>
           </span>
         </span>
         <table className='postlist-table'>
