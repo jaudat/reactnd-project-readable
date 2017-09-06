@@ -41,7 +41,7 @@ export const create = (id, timestamp, body, owner, parentId) => {
         ...headers,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({id, timestamp, body, owner, parentId})
+      body: JSON.stringify({id, timestamp, body, author: owner, parentId})
     }).then(res => res.json())
 
 

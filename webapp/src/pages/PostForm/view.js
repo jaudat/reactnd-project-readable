@@ -81,7 +81,7 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch) => {
 
   return {
-    newPost: (post) => create(post.id, post.timestamp, post.title, post.body, 'jaudat', post.category).then( newPost => dispatch(recieveCreatedPost(newPost)) ),
+    newPost: (post) => create(post.id, post.timestamp, post.title, post.body, post.author, post.category).then( newPost => dispatch(recieveCreatedPost(newPost)) ),
     editPost: (post) => update(post.id, post.title, post.body).then( editedPost => dispatch(recieveUpdatedPost(editedPost)) ),
     saveFormPost: (post) => dispatch(recieveFormPost(post)),
     redirect: (value) => dispatch(recievePostFormRedirect(value))
