@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import sortBy from 'sort-by'
 
 import {vote, create, update, remove} from '../../../services/commentsAPI'
 import { 
@@ -25,20 +26,20 @@ class CommentList extends Component {
     this.props.setCurrentEditingComment('')
   }
 
-  componentWillReceiveProps = (nextProps) => {
-    if (nextProps.sortCommentsBy !== this.props.sortCommentsBy) {
-      (nextProps.sortCommentsBy === TIMESTAMP) ? this.orderByTimestamp() : this.orderByVotes()
-    }
+  // componentWillReceiveProps = (nextProps) => {
+  //   if (nextProps.sortCommentsBy !== this.props.sortCommentsBy) {
+  //     (nextProps.sortCommentsBy === TIMESTAMP) ? this.orderByTimestamp() : this.orderByVotes()
+  //   }
 
-  }
+  // }
 
-  orderByTimestamp() {
-    this.props.allCommentsOnSelectedPost.sort((a, b) => (a.timestamp >= b.timestamp) ? -1 : 1 )
-  }
+  // orderByTimestamp() {
+  //   this.props.allCommentsOnSelectedPost.sort((a, b) => (a.timestamp >= b.timestamp) ? -1 : 1 )
+  // }
 
-  orderByVotes() {
-    this.props.allCommentsOnSelectedPost.sort((a, b) => (a.voteScore >= b.voteScore) ? -1 : 1 )
-  }
+  // orderByVotes() {
+  //   this.props.allCommentsOnSelectedPost.sort((a, b) => (a.voteScore >= b.voteScore) ? -1 : 1 )
+  // }
 
   handleDelete = (commentId, event) => {
     this.props.deleteComment(commentId)
@@ -149,7 +150,9 @@ class CommentList extends Component {
           {
             this.props.allCommentsOnSelectedPost.filter(function(comment, index) {
               return (!comment.deleted) 
-            }).map(function(comment, index) {
+            }).sort(
+              sortBy(this.props.sortCommentsBy)
+            ).map(function(comment, index) {
               return (me.props.editingComment === comment.id) ? me.formEntry(comment, index) : me.normalEntry(comment, index)
             })
           }

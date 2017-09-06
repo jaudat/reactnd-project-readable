@@ -1,5 +1,5 @@
-export const TIMESTAMP = 'TIMESTAMP'
-export const VOTES = 'VOTES'
+export const TIMESTAMP = 'timestamp'
+export const VOTES = 'voteScore'
 export const UPVOTE = 'upVote'
 export const DOWNVOTE = 'downVote'
 

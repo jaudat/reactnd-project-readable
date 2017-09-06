@@ -2,26 +2,13 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import sortBy from 'sort-by'
+
 import {sortPostsBy, TIMESTAMP, VOTES, incrementVote, decrementVote, UPVOTE, DOWNVOTE} from './action'
 import {vote} from '../../../services/postsAPI'
 import './style.css'
 
 class PostList extends Component {
-
-  componentWillReceiveProps = (nextProps) => {
-    if (nextProps.sortPostsBy !== this.props.sortPostsBy) {
-      (nextProps.sortPostsBy === TIMESTAMP) ? this.orderByTimestamp() : this.orderByVotes()
-    }
-
-  }
-
-  orderByTimestamp() {
-    this.props.posts.sort((a, b) => (a.timestamp >= b.timestamp) ? -1 : 1 )
-  }
-
-  orderByVotes() {
-    this.props.posts.sort((a, b) => (a.voteScore >= b.voteScore) ? -1 : 1 )
-  }
 
   render = () => {
     const me = this
@@ -46,7 +33,11 @@ class PostList extends Component {
           </thead>
           <tbody>
             {
-              this.props.posts.filter( (post, index) => (!post.deleted) ).map(function(post, index) {
+              this.props.posts.filter( 
+                (post, index) => (!post.deleted) 
+              ).sort(
+                sortBy(this.props.sortPostsBy)
+              ).map(function(post, index) {
                 return (
                   <tr key={index}>
                     <td>
