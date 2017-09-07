@@ -15,6 +15,7 @@ import {sortPostsReducer} from './components/Post/List/reducer'
 import {postDetailRedirectReducer} from './components/Post/Detail/reducer'
 import {sortCommentsReducer, formCommentReducer, editingCommentReducer} from './components/Comment/List/reducer'
 import {formPostReducer, postFormRedirectReducer} from './pages/PostForm/reducer'
+import {pageNotFoundReducer} from './pages/NotFound/reducer'
 
 const rootReducer = combineReducers({
   categories: categoriesReducer,
@@ -27,7 +28,8 @@ const rootReducer = combineReducers({
   formComment: formCommentReducer,
   editingComment: editingCommentReducer,
   postDetailRedirect: postDetailRedirectReducer,
-  postFormRedirect: postFormRedirectReducer
+  postFormRedirect: postFormRedirectReducer,
+  pageNotFound: pageNotFoundReducer
 })
 
 // const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION__ || compose
