@@ -31,12 +31,15 @@ class PostForm extends Component {
 
 }
 
-const mapStateToProps = (state, props) => {
-  return {
-    formPost: state.formPost,
-    selectedPost: state.selectedPost
-  }
-}
+/**
+ * 
+ * @param {*} state 
+ * @param {*} props 
+ */
+const mapStateToProps = ({formPost, selectedPost}, props) => ({
+    formPost,
+    selectedPost
+  })
 
 const mapDispatchToProps = (dispatch) => {
   

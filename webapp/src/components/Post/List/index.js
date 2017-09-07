@@ -73,9 +73,13 @@ PostList.propTypes = {
   sortPostsBy: PropTypes.string.isRequired
 }
 
-const mapStateToProps = (state, props) => ({
-  posts: state.posts,
-  sortPostsBy: state.sortPostsBy
+/**
+ * 
+ * @param {*} state 
+ * @param {*} props 
+ */
+const mapStateToProps = ({posts, sortPostsBy}, props) => ({
+  posts, sortPostsBy
 })
 
 const mapDispatchToProps = (dispatch) => ({

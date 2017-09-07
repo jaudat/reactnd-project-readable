@@ -176,12 +176,18 @@ CommentList.propTypes = {
   editingComment: PropTypes.string.isRequired
 }
 
-const mapStateToProps = (state, props) => ({
-  allCommentsOnSelectedPost: state.allCommentsOnSelectedPost,
-  sortCommentsBy: state.sortCommentsBy,
-  formComment: state.formComment,
-  selectedPost: state.selectedPost,
-  editingComment: state.editingComment
+
+/**
+ * 
+ * @param {*} state 
+ * @param {*} props 
+ */
+const mapStateToProps = ({allCommentsOnSelectedPost, sortCommentsBy, formComment, selectedPost, editingComment}, props) => ({
+  allCommentsOnSelectedPost,
+  sortCommentsBy,
+  formComment,
+  selectedPost,
+  editingComment
 })
 
 const mapDispatchToProps = (dispatch) => {

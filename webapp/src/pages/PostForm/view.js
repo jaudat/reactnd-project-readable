@@ -70,13 +70,15 @@ class View extends Component {
 }
 
 
-
-const mapStateToProps = (state, props) => {
-  return {
-    formPost: state.formPost,
-    postFormRedirect: state.postFormRedirect
-  }
-}
+/**
+ * 
+ * @param {*} state 
+ * @param {*} props 
+ */
+const mapStateToProps = ({formPost, postFormRedirect}, props) => ({
+    formPost,
+    postFormRedirect
+  })
   
 const mapDispatchToProps = (dispatch) => {
 

@@ -54,9 +54,14 @@ Detail.propTypes = {
   postDetailRedirect: PropTypes.bool.isRequired
 }
 
-const mapStateToProps = (state, props) => ({
-  selectedPost: state.selectedPost,
-  postDetailRedirect: state.postDetailRedirect
+/**
+ * 
+ * @param {*} state 
+ * @param {*} props 
+ */
+const mapStateToProps = ({selectedPost, postDetailRedirect}, props) => ({
+  selectedPost,
+  postDetailRedirect
 })
 
 const mapDispatchToProps = (dispatch) => ({

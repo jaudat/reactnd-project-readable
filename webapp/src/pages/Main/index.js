@@ -52,14 +52,15 @@ class Main extends Component {
   render = () => <MainView />
 }
 
-const mapStateToProps = (state, props) => {
-
-  return {
-    categories: state.categories,
-    posts: state.posts
-  }
-
-}
+/**
+ * 
+ * @param {*} state 
+ * @param {*} props 
+ */
+const mapStateToProps = ({categories, posts}, props) => ({
+    categories,
+    posts
+  })
 
 const mapDispatchToProps = (dispatch) => {
   return {

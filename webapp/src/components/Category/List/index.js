@@ -25,8 +25,13 @@ CategoryList.propTypes = {
   categories: PropTypes.array.isRequired
 }
 
-const mapStateToProps = (state, props) => ({
-  categories: state.categories,
+/**
+ * 
+ * @param {*} state 
+ * @param {*} props 
+ */
+const mapStateToProps = ({categories}, props) => ({
+  categories
 })
 
 export default connect(mapStateToProps)(CategoryList)
